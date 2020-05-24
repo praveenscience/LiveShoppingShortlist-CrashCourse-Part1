@@ -43,7 +43,7 @@ const App = () => {
       <Container fluid={true}>
         <div className="col-12">
           <form className="form-inline" onSubmit={handleAddForm}>
-            <div className="form-group mr-sm-3 mb-2">
+            <div className="form-group mr-sm-3">
               <label htmlFor="ItemName" className="sr-only">
                 Item Name
               </label>
@@ -56,7 +56,7 @@ const App = () => {
                 onChange={e => SetFormItem(e.target.value)}
               />
             </div>
-            <div className="form-group mr-sm-3 mb-2">
+            <div className="form-group mr-sm-3">
               <select
                 className="custom-select"
                 value={FormFreq}
@@ -74,7 +74,7 @@ const App = () => {
             </div>
             <button
               type="submit"
-              className="btn btn-primary mr-sm-3 mb-2"
+              className="btn btn-primary mr-sm-3"
               disabled={
                 FormItem.trim().length === 0 || FormFreq.trim().length === 0
               }
@@ -82,7 +82,7 @@ const App = () => {
               <i className="fa fa-cart-plus"></i> Add Item
             </button>
             <button
-              className="btn btn-info mb-2"
+              className="btn btn-info"
               onClick={e => {
                 e.preventDefault();
                 setShowIE(!ShowIE);
@@ -93,7 +93,7 @@ const App = () => {
           </form>
         </div>
         {ShowIE && (
-          <div className="col-12 mb-4">
+          <div className="col-12 mt-2">
             <div className="card">
               <div className="card-header">
                 <i className="fa fa-refresh"></i> Import / Export
@@ -130,7 +130,7 @@ const App = () => {
             </div>
           </div>
         )}
-        <div className="col-12">
+        <div className="col-12 mt-4">
           <div className="card-deck">
             {Object.keys(List).map((Freq, key) => (
               <div className="card" key={key}>
