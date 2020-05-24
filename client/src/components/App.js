@@ -38,11 +38,17 @@ const App = () => {
               <div className="card" key={key}>
                 <div className="card-header text-center">{Freq}</div>
                 <ul className="list-group list-group-flush">
-                  {List[Freq].map((item, k) => (
-                    <li className="list-group-item" key={k}>
-                      {item}
+                  {List[Freq].length > 0 ? (
+                    List[Freq].map((item, k) => (
+                      <li className="list-group-item" key={k}>
+                        {item}
+                      </li>
+                    ))
+                  ) : (
+                    <li className="list-group-item text-center p-5">
+                      Nothing to show here, please add one.
                     </li>
-                  ))}
+                  )}
                 </ul>
               </div>
             ))}
