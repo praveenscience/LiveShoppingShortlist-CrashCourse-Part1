@@ -4,10 +4,10 @@ import Container from "./Shared/ContainerRow";
 
 const App = () => {
   const [List, setList] = useState({
-    Daily: ["Milk", "Cheese"],
+    Daily: [],
     Weekly: [],
     BiWeekly: [],
-    Monthly: ["Rice"]
+    Monthly: []
   });
   const [FormItem, SetFormItem] = useState("");
   const [FormFreq, SetFormFreq] = useState("");
@@ -31,7 +31,6 @@ const App = () => {
   const handleAddForm = e => {
     e.preventDefault();
     AddItem(FormFreq, FormItem);
-    SetFormFreq("");
     SetFormItem("");
   };
   return (
