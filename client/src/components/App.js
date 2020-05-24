@@ -40,8 +40,20 @@ const App = () => {
                 <ul className="list-group list-group-flush">
                   {List[Freq].length > 0 ? (
                     List[Freq].map((item, k) => (
-                      <li className="list-group-item" key={k}>
+                      <li
+                        className="list-group-item list-group-item-action"
+                        key={k}
+                      >
                         {item}
+                        <button
+                          className="btn btn-danger float-right btn-sm"
+                          onClick={e => {
+                            e.preventDefault();
+                            DeleteItem(Freq, k);
+                          }}
+                        >
+                          <i className="fa fa-trash"></i>
+                        </button>
                       </li>
                     ))
                   ) : (
