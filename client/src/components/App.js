@@ -4,10 +4,10 @@ import Container from "./Shared/ContainerRow";
 
 const App = () => {
   const [List, setList] = useState({
-    Daily: [],
+    Daily: ["Milk", "Cheese"],
     Weekly: [],
     BiWeekly: [],
-    Monthly: []
+    Monthly: ["Rice"]
   });
   const AddItem = (Freq, Item) => {
     const NewList = { ...List };
@@ -32,7 +32,22 @@ const App = () => {
         Shopping Shortlist
       </Header>
       <Container fluid={true}>
-        <div className="col-12 col-sm-10 offset-sm-1 col-md-6 offset-md-3"></div>
+        <div className="col-12">
+          <div className="card-deck">
+            {Object.keys(List).map((Freq, key) => (
+              <div className="card" key={key}>
+                <div className="card-header text-center">{Freq}</div>
+                <ul className="list-group list-group-flush">
+                  {List[Freq].map((item, k) => (
+                    <li className="list-group-item" key={k}>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
       </Container>
     </div>
   );
