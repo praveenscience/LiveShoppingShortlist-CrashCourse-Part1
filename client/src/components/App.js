@@ -9,6 +9,8 @@ const App = () => {
     BiWeekly: [],
     Monthly: ["Rice"]
   });
+  const [FormItem, SetFormItem] = useState("");
+  const [FormFreq, SetFormFreq] = useState("");
   const AddItem = (Freq, Item) => {
     const NewList = { ...List };
     NewList[Freq] = [...List[Freq]];
@@ -26,6 +28,12 @@ const App = () => {
       setList(NewList);
     }
   };
+  const handleAddForm = e => {
+    e.preventDefault();
+    AddItem(FormFreq, FormItem);
+    SetFormFreq("");
+    SetFormItem("");
+  };
   return (
     <div className="App">
       <Header dark={true} className="Header mb-3">
@@ -33,6 +41,46 @@ const App = () => {
       </Header>
       <Container fluid={true}>
         <div className="col-12">
+          <form className="form-inline" onSubmit={handleAddForm}>
+            <div className="form-group mr-sm-3 mb-2">
+              <label htmlFor="ItemName" className="sr-only">
+                Item Name
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="ItemName"
+                placeholder="Item Name"
+                value={FormItem}
+                onChange={e => SetFormItem(e.target.value)}
+              />
+            </div>
+            <div className="form-group mr-sm-3 mb-2">
+              <select
+                className="custom-select"
+                value={FormFreq}
+                onChange={e => SetFormFreq(e.target.value)}
+              >
+                <option disabled value="">
+                  Frequency
+                </option>
+                {Object.keys(List).map((Freq, key) => (
+                  <option value={Freq} key={key}>
+                    {Freq}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <button
+              type="submit"
+              className="btn btn-primary mb-2"
+              disabled={
+                FormItem.trim().length === 0 || FormFreq.trim().length === 0
+              }
+            >
+              Add Item
+            </button>
+          </form>
           <div className="card-deck">
             {Object.keys(List).map((Freq, key) => (
               <div className="card" key={key}>
