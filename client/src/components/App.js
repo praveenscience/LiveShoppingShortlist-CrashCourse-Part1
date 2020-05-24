@@ -12,8 +12,19 @@ const App = () => {
   const AddItem = (Freq, Item) => {
     const NewList = { ...List };
     NewList[Freq] = [...List[Freq]];
-    NewList[Freq].push(Item);
-    setList(NewList);
+    if (Item.trim().length > 0) {
+      NewList[Freq].push(Item);
+      setList(NewList);
+      return NewList[Freq].length - 1;
+    }
+  };
+  const DeleteItem = (Freq, ItemId) => {
+    const NewList = { ...List };
+    NewList[Freq] = [...List[Freq]];
+    if (!!NewList[Freq][ItemId]) {
+      NewList[Freq].splice(ItemId, 1);
+      setList(NewList);
+    }
   };
   return (
     <div className="App">
@@ -21,29 +32,7 @@ const App = () => {
         Shopping Shortlist
       </Header>
       <Container fluid={true}>
-        <div className="col-12 col-sm-10 offset-sm-1 col-md-6 offset-md-3">
-          <pre className="border p-3 bg-light">
-            {JSON.stringify(List, null, 2)}
-          </pre>
-          <button
-            className="btn btn-primary"
-            onClick={e => {
-              e.preventDefault();
-              AddItem("Daily", "Cheese");
-            }}
-          >
-            Add Cheese to Daily List
-          </button>
-          <button
-            className="btn btn-primary ml-3"
-            onClick={e => {
-              e.preventDefault();
-              AddItem("Daily", "Milk");
-            }}
-          >
-            Add Milk to Daily List
-          </button>
-        </div>
+        <div className="col-12 col-sm-10 offset-sm-1 col-md-6 offset-md-3"></div>
       </Container>
     </div>
   );
