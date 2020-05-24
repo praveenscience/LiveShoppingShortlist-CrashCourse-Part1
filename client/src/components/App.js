@@ -11,6 +11,7 @@ const App = () => {
   });
   const [FormItem, SetFormItem] = useState("");
   const [FormFreq, SetFormFreq] = useState("");
+  const [Import, setImport] = useState("");
   const AddItem = (Freq, Item) => {
     const NewList = { ...List };
     NewList[Freq] = [...List[Freq]];
@@ -72,14 +73,55 @@ const App = () => {
             </div>
             <button
               type="submit"
-              className="btn btn-primary mb-2"
+              className="btn btn-primary mr-sm-3 mb-2"
               disabled={
                 FormItem.trim().length === 0 || FormFreq.trim().length === 0
               }
             >
-              Add Item
+              <i className="fa fa-cart-plus"></i> Add Item
+            </button>
+            <button className="btn btn-info mb-2">
+              <i className="fa fa-refresh"></i> Import / Export
             </button>
           </form>
+        </div>
+        <div className="col-12 mb-4">
+          <div className="card">
+            <div className="card-header">
+              <i className="fa fa-refresh"></i> Import / Export
+            </div>
+            <div className="card-body">
+              <div className="row">
+                <div className="col-6">
+                  <h5>Current State to Export</h5>
+                  <pre className="border rounded bg-light p-2">
+                    {JSON.stringify(List, null, 2)}
+                  </pre>
+                </div>
+                <div className="col-6">
+                  <h5>Enter JSON to Import</h5>
+                  <textarea
+                    className="border rounded bg-light p-2 w-100"
+                    value={Import}
+                    onChange={e => setImport(e.target.value)}
+                  />
+                  <div className="text-right">
+                    <button
+                      className="btn btn-danger"
+                      onClick={e => {
+                        e.preventDefault();
+                        setList(JSON.parse(Import));
+                      }}
+                    >
+                      Update
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="col-12">
           <div className="card-deck">
             {Object.keys(List).map((Freq, key) => (
               <div className="card" key={key}>
